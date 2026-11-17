@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """Print a user's completed tasks from the JSONPlaceholder API."""
 
-import sys
-
 import requests
+import sys
 
 
 USERS_URL = "https://jsonplaceholder.typicode.com/users"
@@ -17,13 +16,15 @@ def main(user_id):
     user = next(user for user in users if user["id"] == user_id)
     user_tasks = [todo for todo in todos if todo["userId"] == user_id]
     completed = [todo for todo in user_tasks if todo["completed"]]
+    lines = ["Employee {} is done with tasks({}/{}):".format(
+        user["name"], len(completed), len(user_tasks)
+    )]
+    lines.extend("\t {}".format(task["title"]) for task in completed)
+    output = "\n".join(lines) + "\n"
 
-    with open("student_output", "w") as output:
-        output.write("Employee {} is done with tasks({}/{}):\n".format(
-            user["name"], len(completed), len(user_tasks)
-        ))
-        for task in completed:
-            output.write("\t {}\n".format(task["title"]))
+    with open("student_output", "w") as output_file:
+        output_file.write(output)
+    print(output, end="")
 
 
 if __name__ == "__main__":
