@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """Display the TODO list progress of an employee using a REST API."""
 
-import sys
-
 import requests
+import sys
 
 BASE_URL = "https://jsonplaceholder.typicode.com"
 
