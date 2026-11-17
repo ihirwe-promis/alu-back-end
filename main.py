@@ -18,11 +18,12 @@ def main(user_id):
     user_tasks = [todo for todo in todos if todo["userId"] == user_id]
     completed = [todo for todo in user_tasks if todo["completed"]]
 
-    print("Employee {} is done with tasks({}/{}):".format(
-        user["name"], len(completed), len(user_tasks)
-    ))
-    for task in completed:
-        print("\t {}".format(task["title"]))
+    with open("student_output", "w") as output:
+        output.write("Employee {} is done with tasks({}/{}):\n".format(
+            user["name"], len(completed), len(user_tasks)
+        ))
+        for task in completed:
+            output.write("\t {}\n".format(task["title"]))
 
 
 if __name__ == "__main__":
